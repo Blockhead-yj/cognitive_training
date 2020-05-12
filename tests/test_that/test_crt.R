@@ -11,6 +11,12 @@ test_that("`crt` should deal with normal and abnormal data", {
       jsonlite::read_json("data_crt.json", simplifyVector = TRUE)
     )$count_correct, 334
   )
+  expect_equal(
+    crt(
+      jsonlite::read_json("data_crt.json", simplifyVector = TRUE)
+    )$is_normal, TRUE
+  )
   expect_equal(is.na(crt(data.frame())$mrt), TRUE)
   expect_equal(is.na(crt(data.frame())$count_correct), TRUE)
+  expect_equal(crt(data.frame())$is_normal, FALSE)
 })
