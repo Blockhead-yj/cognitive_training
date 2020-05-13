@@ -2,6 +2,7 @@
 
 export(bart)
 export(bps)
+export(conflict)
 export(crt)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)
