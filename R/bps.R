@@ -30,8 +30,8 @@ bps <- function(data, ...) {
     dplyr::transmute(bps_score = .data$lure - .data$foil)
   is_normal <- data %>%
     dplyr::filter(.data$Phase == "test") %>%
-    dplyr::mutate(ACC_r = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)) %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$ACC_r == 1)) %>%
+    dplyr::mutate(acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)) %>%
+    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
   cbind(bps_score, is_normal)
 }

@@ -26,23 +26,23 @@ conflict <- function(data, ...) {
       )
     )
   }
-  data_r <- data %>%
-    dplyr::mutate(ACC_r = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L))
-  count_correct <- data_r %>%
-    dplyr::summarise(count_correct = sum(.data$ACC_r == 1))
-  cong_eff <- data_r %>%
+  data_adj <- data %>%
+    dplyr::mutate(acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L))
+  count_correct <- data_adj %>%
+    dplyr::summarise(count_correct = sum(.data$acc_adj == 1))
+  cong_eff <- data_adj %>%
     dplyr::group_by(.data$Type) %>%
     dplyr::summarise(
-      mrt = mean(.data$RT[.data$ACC_r == 1]),
-      pc = mean(.data$ACC_r == 1)
+      mrt = mean(.data$RT[.data$acc_adj == 1]),
+      pc = mean(.data$acc_adj == 1)
     ) %>%
     tidyr::pivot_wider(names_from = "Type", values_from = c("mrt", "pc")) %>%
     dplyr::transmute(
       cong_eff_rt = .data$mrt_Incongruent - .data$mrt_Congruent,
       cong_eff_pc = .data$pc_Congruent - .data$pc_Incongruent
     )
-  is_normal <- data_r %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$ACC_r == 1)) %>%
+  is_normal <- data_adj %>%
+    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
   cbind(count_correct, cong_eff, is_normal)
 }

@@ -24,14 +24,14 @@ count <- function(data, ...) {
   }
   acc_var <- acc_vars[acc_var_idx]
   if (utils::hasName(data, "RT")) {
-    data_r <- data %>%
+    data_adj <- data %>%
       dplyr::mutate(
-        ACC_r = dplyr::if_else(.data$RT >= 100, !!rlang::sym(acc_var), 0L)
+        acc_adj = dplyr::if_else(.data$RT >= 100, !!rlang::sym(acc_var), 0L)
       )
   } else {
-    data_r <- data %>%
-      dplyr::mutate(ACC_r = !!rlang::sym(acc_var))
+    data_adj <- data %>%
+      dplyr::mutate(acc_adj = !!rlang::sym(acc_var))
   }
-  data_r %>%
-    dplyr::summarise(count_correct = sum(.data$ACC_r == 1), is_normal = TRUE)
+  data_adj %>%
+    dplyr::summarise(count_correct = sum(.data$acc_adj == 1), is_normal = TRUE)
 }

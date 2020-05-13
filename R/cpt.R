@@ -35,16 +35,16 @@ cpt <- function(data, ...) {
       )
     )
   }
-  data_r <- data %>%
+  data_adj <- data %>%
     dplyr::mutate(
       type_adj = dplyr::if_else(.data$Type == "Target", "s", "n"),
-      ACC_r = dplyr::if_else(.data$RT < 100 & .data$type_adj == "s", 0L, .data$ACC)
+      acc_adj = dplyr::if_else(.data$RT < 100 & .data$type_adj == "s", 0L, .data$ACC)
     )
-  sdt <- data_r %>%
+  sdt <- data_adj %>%
     dplyr::group_by(.data$type_adj) %>%
     dplyr::summarise(
       n = dplyr::n(),
-      pc = mean(.data$ACC_r == 1)
+      pc = mean(.data$acc_adj == 1)
     ) %>%
     dplyr::mutate(
       pc_adj = dplyr::case_when(
@@ -59,11 +59,11 @@ cpt <- function(data, ...) {
       dprime = stats::qnorm(.data$s) + stats::qnorm(.data$n),
       c = -(stats::qnorm(.data$s) - stats::qnorm(.data$n)) / 2
     )
-  counts <- data_r %>%
+  counts <- data_adj %>%
     dplyr::group_by(.data$type_adj) %>%
     dplyr::summarise(
-      nc = sum(.data$ACC_r == 1),
-      ne = sum(.data$ACC_r == 0)
+      nc = sum(.data$acc_adj == 1),
+      ne = sum(.data$acc_adj == 0)
     ) %>%
     tidyr::pivot_wider(names_from = "type_adj", values_from = c("nc", "ne")) %>%
     dplyr::select(
@@ -71,14 +71,14 @@ cpt <- function(data, ...) {
       commissions = .data$ne_n,
       omissions = .data$ne_s
     )
-  rt <- data_r %>%
-    dplyr::filter(.data$ACC_r == 1 & .data$type_adj == "s") %>%
+  rt <- data_adj %>%
+    dplyr::filter(.data$acc_adj == 1 & .data$type_adj == "s") %>%
     dplyr::summarise(
       mrt = mean(.data$RT),
       rtsd = stats::sd(.data$RT)
     )
-  is_normal <- data_r %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$ACC_r == 1)) %>%
+  is_normal <- data_adj %>%
+    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
   cbind(sdt, counts, rt, is_normal)
 }
