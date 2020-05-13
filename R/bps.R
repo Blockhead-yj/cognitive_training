@@ -1,4 +1,4 @@
-#' Calculates index scores for Choice Reaction Time game
+#' Calculates index scores for Behavioral Pattern Separation (BPS) game
 #'
 #' The index was developed by Stark et. al. (2013), named as "BPS score".
 #'

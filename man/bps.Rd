@@ -2,7 +2,7 @@
 % Please edit documentation in R/bps.R
 \name{bps}
 \alias{bps}
-\title{Calculates index scores for Choice Reaction Time game}
+\title{Calculates index scores for Behavioral Pattern Separation (BPS) game}
 \usage{
 bps(data, ...)
 }
