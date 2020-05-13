@@ -3,7 +3,7 @@ library(dataprocr2)
 test_that("`conflict` should deal with normal and abnormal data", {
   expect_silent(
     result_normal <- conflict(
-      jsonlite::read_json("data_flanker.json", simplifyVector = TRUE)
+      jsonlite::read_json("data_conflict/data_flanker.json", simplifyVector = TRUE)
     )
   )
   expect_named(result_normal, c("count_correct", "cong_eff_rt", "cong_eff_pc", "is_normal"))
@@ -13,7 +13,7 @@ test_that("`conflict` should deal with normal and abnormal data", {
   expect_true(result_normal$is_normal)
   expect_silent(
     result_normal2 <- conflict(
-      jsonlite::read_json("data_flanker2.json", simplifyVector = TRUE)
+      jsonlite::read_json("data_conflict/data_flanker2.json", simplifyVector = TRUE)
     )
   )
   expect_named(result_normal2, c("count_correct", "cong_eff_rt", "cong_eff_pc", "is_normal"))
