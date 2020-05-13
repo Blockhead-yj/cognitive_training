@@ -12,15 +12,14 @@ conflict(data, ...)
 \item{...}{Other input argument for future expansion.}
 }
 \value{
-A \code{data.frame} contains following values:
-\describe{
+A \code{data.frame} contains following values: \describe{
   \item{count_correct}{Count of correct responses.}
-  \item{cong_eff_rt}{Congruency effect of reaction time (RT), i.e., RT incongruency - RT congruency.}
-  \item{cong_eff_pc}{Congruency effect of percent of correct (PC), i.e., PC congruency - PC incongruency.}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+  \item{cong_eff_rt}{Congruency effect of reaction time (RT), i.e., RT
+  incongruency - RT congruency.} \item{cong_eff_pc}{Congruency effect of
+  percent of correct (PC), i.e., PC congruency - PC incongruency.}
+  \item{is_normal}{Checking result whether the data is normal.} }
 }
 \description{
-Now we majorly consider two indices: mean reaction time and count of correct
-responses.
+Count of correct responses and congruency effect of correct response and
+reaction time are all included.
 }
