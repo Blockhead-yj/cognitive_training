@@ -19,6 +19,5 @@ A \code{data.frame} contains following values:
 }
 }
 \description{
-Now we majorly consider two indices: mean reaction time and count of correct
-responses.
+The index was developed by Stark et. al. (2013), named as "BPS score".
 }

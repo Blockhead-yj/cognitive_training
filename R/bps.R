@@ -1,7 +1,6 @@
 #' Calculates index scores for Choice Reaction Time game
 #'
-#' Now we majorly consider two indices: mean reaction time and count of correct
-#' responses.
+#' The index was developed by Stark et. al. (2013), named as "BPS score".
 #'
 #' @param data Raw data of class \code{data.frame}.
 #' @param ... Other input argument for future expansion.
