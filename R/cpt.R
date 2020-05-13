@@ -38,7 +38,7 @@ cpt <- function(data, ...) {
   data_r <- data %>%
     dplyr::mutate(
       type_adj = dplyr::if_else(.data$Type == "Target", "s", "n"),
-      ACC_r = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)
+      ACC_r = dplyr::if_else(.data$RT < 100 & .data$type_adj == "s", 0L, .data$ACC)
     )
   sdt <- data_r %>%
     dplyr::group_by(.data$type_adj) %>%
