@@ -12,6 +12,7 @@
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
 #' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #' @export
 crt <- function(data, ...) {
   if (!all(utils::hasName(data, c("ACC", "RT")))) {

@@ -11,6 +11,7 @@
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
 #' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #' @export
 bart <- function(data, ...) {
   if (!all(utils::hasName(data, c("NHit", "Feedback")))) {
@@ -25,8 +26,8 @@ bart <- function(data, ...) {
   }
   data %>%
     dplyr::summarise(
-      mean_hits = mean(NHit[Feedback == 1]),
-      mean_hits_raw = mean(NHit),
+      mean_hits = mean(.data$NHit[.data$Feedback == 1]),
+      mean_hits_raw = mean(.data$NHit),
       is_normal = TRUE
     )
 }
