@@ -12,7 +12,6 @@
 #' }
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-#' @importFrom rlang !!
 #' @export
 locmem <- function(data, ...) {
   if (!all(utils::hasName(data, "RespLocDist"))) {
