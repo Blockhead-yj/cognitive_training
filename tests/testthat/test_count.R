@@ -37,6 +37,33 @@ test_that("`count` should deal with normal and abnormal data", {
   expect_named(result_jlo, c("count_correct", "is_normal"))
   expect_equal(result_jlo$count_correct, 13)
   expect_true(result_jlo$is_normal)
+  # testing on Calc game
+  expect_silent(
+    result_calc <- count(
+      jsonlite::read_json("data_count/data_calc.json", simplifyVector = TRUE)
+    )
+  )
+  expect_named(result_calc, c("count_correct", "is_normal"))
+  expect_equal(result_calc$count_correct, 24)
+  expect_true(result_calc$is_normal)
+  # testing on CalcJr game
+  expect_silent(
+    result_calcjr <- count(
+      jsonlite::read_json("data_count/data_calcjr.json", simplifyVector = TRUE)
+    )
+  )
+  expect_named(result_calcjr, c("count_correct", "is_normal"))
+  expect_equal(result_calcjr$count_correct, 70)
+  expect_true(result_calcjr$is_normal)
+  # testing on CalcMed game
+  expect_silent(
+    result_calcmed <- count(
+      jsonlite::read_json("data_count/data_calcmed.json", simplifyVector = TRUE)
+    )
+  )
+  expect_named(result_calcmed, c("count_correct", "is_normal"))
+  expect_equal(result_calcmed$count_correct, 115)
+  expect_true(result_calcmed$is_normal)
   # testing on abnormal data input
   expect_warning(
     result_abnormal <- count(data.frame()),
