@@ -12,11 +12,13 @@ conflict(data, ...)
 \item{...}{Other input argument for future expansion.}
 }
 \value{
-A \code{data.frame} contains following values: \describe{
+A \code{data.frame} contains following values:
+\describe{
   \item{count_correct}{Count of correct responses.}
   \item{cong_eff_rt}{Congruency effect of reaction time (RT), i.e., RT
-  incongruency - RT congruency.} \item{cong_eff_pc}{Congruency effect of
-  percent of correct (PC), i.e., PC congruency - PC incongruency.}
+    incongruency - RT congruency.}
+  \item{cong_eff_pc}{Congruency effect of percent of correct (PC), i.e., PC
+    congruency - PC incongruency.}
   \item{is_normal}{Checking result whether the data is normal.} }
 }
 \description{
