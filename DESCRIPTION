@@ -1,7 +1,7 @@
 Package: dataprocr2
 Type: Package
 Title: Utility Functions for Data Processing of Iquizoo Games
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: person("Liang", "Zhang", email = "psychelzh@outlook.com",
                  role = c("aut", "cre"))
 Description: Several couples of games are developed by IQUIZOO.COM. Here

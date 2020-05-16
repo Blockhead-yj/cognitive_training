@@ -3,7 +3,7 @@
 export(bart)
 export(bps)
 export(conflict)
-export(count)
+export(countcorrect)
 export(cpt)
 export(crt)
 export(drm)

@@ -13,7 +13,7 @@
 #' @importFrom rlang .data
 #' @importFrom rlang !!
 #' @export
-count <- function(data, ...) {
+countcorrect <- function(data, ...) {
   acc_vars <- c("ACC", "Repetition")
   acc_var_idx <- utils::hasName(data, acc_vars)
   if (!any(acc_var_idx)) {
