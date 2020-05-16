@@ -24,7 +24,7 @@ test_that("`nle` should deal with normal and abnormal data", {
     result_abnormal <- nle(data.frame()),
     "`Number` and `Resp` variables are required."
   )
-  expect_named(result_nlemed, c("mean_err", "is_normal"))
+  expect_named(result_abnormal, c("mean_err", "is_normal"))
   expect_true(is.na(result_abnormal$mean_err))
   expect_false(result_abnormal$is_normal)
 })
