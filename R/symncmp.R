@@ -10,8 +10,8 @@
 #' \describe{
 #'   \item{pc}{Percentage of correct responses.}
 #'   \item{mrt}{Mean reaction time.}
-#'   \item{dist_effect}{Distance effect.}
-#'   \item{dist_effect_adj}{Adjusted distance effect.}
+#'   \item{dist_eff}{Distance effect.}
+#'   \item{dist_eff_adj}{Adjusted distance effect.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
 #' @importFrom magrittr %>%
@@ -24,8 +24,8 @@ symncmp <- function(data, ...) {
       data.frame(
         pc = NA_real_,
         mrt = NA_real_,
-        dist_effect = NA_real_,
-        dist_effect_adj = NA_real_,
+        dist_eff = NA_real_,
+        dist_eff_adj = NA_real_,
         is_normal = FALSE
       )
     )
@@ -38,18 +38,18 @@ symncmp <- function(data, ...) {
       pc = mean(.data$acc_adj == 1),
       mrt = mean(.data$RT[.data$acc_adj == 1])
     )
-  data_dist_effect <- data_adj %>%
+  data_dist_eff <- data_adj %>%
     dplyr::filter(.data$acc_adj == 1) %>%
     dplyr::mutate(dist = .data$Big - .data$Small)
-  dist_effect_orig <- stats::lm(RT ~ dist, data_dist_effect) %>%
+  dist_eff_orig <- stats::lm(RT ~ dist, data_dist_eff) %>%
     stats::coef() %>%
     `[`("dist")
-  dist_effect <- data.frame(
-    dist_effect = dist_effect_orig,
-    dist_effect_adj = dist_effect_orig / basic$mrt
+  dist_eff <- data.frame(
+    dist_eff = dist_eff_orig,
+    dist_eff_adj = dist_eff_orig / basic$mrt
   )
   is_normal <- data_adj %>%
     dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
-  cbind(basic, dist_effect, is_normal)
+  cbind(basic, dist_eff, is_normal)
 }
