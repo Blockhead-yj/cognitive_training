@@ -1,0 +1,23 @@
+Package: dataprocr2
+Type: Package
+Title: Utility Functions for Data Processing of Iquizoo Games
+Version: 0.0.1
+Authors@R: person("Liang", "Zhang", email = "psychelzh@outlook.com",
+                 role = c("aut", "cre"))
+Description: Several couples of games are developed by IQUIZOO.COM. Here
+    are the functions used to do data processing for all of those games.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    magrittr,
+    dplyr,
+    tidyr,
+    purrr,
+    jsonlite,
+    rlang
+RoxygenNote: 7.1.0
+URL: https://github.com/psychelzh/dataprocr2
+BugReports: https://github.com/psychelzh/dataprocr2/issues
+Suggests:
+    testthat
