@@ -36,7 +36,7 @@ test_that("`locmem` should deal with normal and abnormal data", {
     result_abnormal <- locmem(data.frame()),
     "`RespLocDist` variable is required."
   )
-  expect_named(result_locmemmed, c("mean_dist", "pc", "is_normal"))
+  expect_named(result_abnormal, c("mean_dist", "pc", "is_normal"))
   expect_true(is.na(result_abnormal$mean_dist))
   expect_true(is.na(result_abnormal$pc))
   expect_false(result_abnormal$is_normal)
