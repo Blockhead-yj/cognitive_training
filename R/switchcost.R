@@ -33,9 +33,9 @@ switchcost <- function(data, ...) {
   switch_cost_all <- data_adj %>%
     dplyr::mutate(
       type_adj = dplyr::case_when(
-        .data$Type == "" ~ .data$Task,
+        .data$Type %in% c("Repeat", "Switch") ~ .data$Type,
         .data$Type == "Filler" ~ "",
-        TRUE ~ .data$Type
+        TRUE ~  .data$Task
       )
     ) %>%
     dplyr::filter(.data$type_adj != "") %>%
