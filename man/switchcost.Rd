@@ -15,8 +15,9 @@ switchcost(data, ...)
 A \code{data.frame} contains following values:
 \describe{
   \item{count_correct}{Count of correct responses.}
-  \item{switch_cost_gen}{General switch cost (based on mean reation times).}
-  \item{switch_cost_spe}{Specific switch cost (based on mean reation times).}
+  \item{switch_cost_gen_count}{General switch cost (based on count of correct responses).}
+  \item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
+  \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
   \item{is_normal}{Checking result whether the data is normal.} }
 }
 \description{
