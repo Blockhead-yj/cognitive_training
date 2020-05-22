@@ -28,15 +28,6 @@ test_that("`countcorrect` should deal with normal and abnormal data", {
   expect_named(result_numsets, c("count_correct", "is_normal"))
   expect_equal(result_numsets$count_correct, 85)
   expect_true(result_numsets$is_normal)
-  # testing on JLO game
-  expect_silent(
-    result_jlo <- countcorrect(
-      jsonlite::read_json("data_countcorrect/data_jlo.json", simplifyVector = TRUE)
-    )
-  )
-  expect_named(result_jlo, c("count_correct", "is_normal"))
-  expect_equal(result_jlo$count_correct, 13)
-  expect_true(result_jlo$is_normal)
   # testing on Calc game
   expect_silent(
     result_calc <- countcorrect(
