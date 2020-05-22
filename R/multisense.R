@@ -9,6 +9,7 @@
 #'   \item{mrt_image}{Mean reaction time of Image stimuli.}
 #'   \item{mrt_sound}{Mean reaction time of Sound stimuli.}
 #'   \item{mrt_mixed}{Mean reaction time of Mixed stimuli.}
+#'   \item{mrt_mixadv}{Mean reaction decrease of Mixed stimuli compared to other two types of stimuli.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
 #' @importFrom magrittr %>%
@@ -22,6 +23,7 @@ multisense <- function(data, ...) {
         mrt_image = NA_real_,
         mrt_sound = NA_real_,
         mrt_mixed = NA_real_,
+        mrt_mixadv = NA_real_,
         is_normal = FALSE
       )
     )
@@ -35,6 +37,7 @@ multisense <- function(data, ...) {
       mrt_image = .data$Image,
       mrt_sound = .data$Sound,
       mrt_mixed = .data$Mixed,
+      mrt_mixadv = (.data$Image + .data$Sound) / 2 - .data$Mixed,
       is_normal = TRUE
     )
 }
