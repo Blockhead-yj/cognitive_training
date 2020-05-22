@@ -14,6 +14,10 @@ bps(data, ...)
 \value{
 A \code{data.frame} contains following values:
 \describe{
+  \item{pc}{Percent of correct responses.}
+  \item{p_sim_lure}{Percent of similar responses for "lure" stimuli.}
+  \item{p_sim_foil}{Percent of similar responses for "foil" stimuli.}
+  \item{p_sim_old}{Percent of similar responses for "target" (i.e., "old") stimuli.}
   \item{bps_score}{BPS score.}
   \item{is_normal}{Checking result whether the data is normal.}
 }
