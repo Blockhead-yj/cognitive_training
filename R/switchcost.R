@@ -8,46 +8,70 @@
 #' @return A \code{data.frame} contains following values:
 #' \describe{
 #'   \item{count_correct}{Count of correct responses.}
-#'   \item{switch_cost_gen}{General switch cost (based on mean reation times).}
-#'   \item{switch_cost_spe}{Specific switch cost (based on mean reation times).}
+#'   \item{switch_cost_gen_count}{General switch cost (based on count of correct responses).}
+#'   \item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
+#'   \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
 #'   \item{is_normal}{Checking result whether the data is normal.} }
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 switchcost <- function(data, ...) {
-  if (!all(utils::hasName(data, c("Type", "ACC", "RT")))) {
-    warning("`Type`, `ACC` and `RT` variables are required.")
+  if (!all(utils::hasName(data, c("Block", "Type", "ACC", "RT")))) {
+    warning("`Block`, `Type`, `ACC` and `RT` variables are required.")
     return(
       data.frame(
         count_correct = NA_real_,
-        switch_cost_gen = NA_real_,
-        switch_cost_spe = NA_real_,
+        switch_cost_gen_count = NA_real_,
+        switch_cost_gen_rt = NA_real_,
+        switch_cost_spe_rt = NA_real_,
         is_normal = FALSE
       )
     )
   }
   data_adj <- data %>%
-    dplyr::mutate(acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L))
-  count_correct <- data_adj %>%
-    dplyr::summarise(count_correct = sum(.data$acc_adj == 1))
-  switch_cost_all <- data_adj %>%
     dplyr::mutate(
       type_adj = dplyr::case_when(
         .data$Type %in% c("Repeat", "Switch") ~ .data$Type,
         .data$Type == "Filler" ~ "",
         TRUE ~  .data$Task
+      ),
+      acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)
+    )
+  count_correct <- data_adj %>%
+    dplyr::summarise(count_correct = sum(.data$acc_adj == 1))
+  n_blocks <- dplyr::n_distinct(data_adj$Block)
+  if (n_blocks == 5) {
+    switch_cost_count <- data_adj %>%
+      dplyr::group_by(.data$Block) %>%
+      dplyr::summarise(count_correct = sum(.data$acc_adj == 1)) %>%
+      tidyr::pivot_wider(names_from = "Block", values_from = "count_correct") %>%
+      dplyr::transmute(
+        switch_cost_gen_count = mean(c(.data$`1`, .data$`2`)) -
+          mean(c(.data$`3`, .data$`4`, .data$`5`))
       )
-    ) %>%
+  } else if (n_blocks == 6) {
+    switch_cost_count <- data_adj %>%
+      dplyr::group_by(.data$Block) %>%
+      dplyr::summarise(count_correct = sum(.data$acc_adj == 1)) %>%
+      tidyr::pivot_wider(names_from = "Block", values_from = "count_correct") %>%
+      dplyr::transmute(
+        switch_cost_gen_count = sum(c(.data$`1`, .data$`2`)) -
+          mean(c(.data$`3`, .data$`4`, .data$`5`, .data$`6`))
+      )
+  } else {
+    switch_cost_count <- data.frame(switch_cost_gen_count = NA_real_)
+  }
+  switch_cost_rt <- data_adj %>%
     dplyr::filter(.data$type_adj != "") %>%
     dplyr::group_by(.data$type_adj) %>%
     dplyr::summarise(mrt = mean(.data$RT[.data$acc_adj == 1])) %>%
     tidyr::pivot_wider(names_from = "type_adj", values_from = "mrt") %>%
     dplyr::transmute(
-      switch_cost_gen = .data$Repeat - (.data$Color + .data$Shape) / 2,
-      switch_cost_spe = .data$Switch - .data$Repeat
+      switch_cost_gen_rt = .data$Repeat - (.data$Color + .data$Shape) / 2,
+      switch_cost_spe_rt = .data$Switch - .data$Repeat
     )
   is_normal <- data_adj %>%
     dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
-  cbind(count_correct, switch_cost_all, is_normal)
+  cbind(count_correct, switch_cost_count, switch_cost_rt, is_normal)
 }
