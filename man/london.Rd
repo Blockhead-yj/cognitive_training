@@ -15,11 +15,13 @@ london(data, ...)
 A \code{data.frame} contains following values:
 \describe{
   \item{tscore}{Total score defined by the game itself.}
+  \item{ratio_score}{Mean of the ratio between best steps and actual steps.}
   \item{mean_level}{Mean level reached.}
   \item{is_normal}{Checking result whether the data is normal.}
 }
 }
 \description{
-Two indices are returned: total scores (defined in the game itself) and mean
-level.
+Two indices are returned: total scores (defined in the game itself), ratio
+score (defined as the mean of the ratios between best steps and actual steps)
+and mean level.
 }

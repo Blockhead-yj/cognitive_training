@@ -15,8 +15,12 @@ conflict(data, ...)
 A \code{data.frame} contains following values:
 \describe{
   \item{count_correct}{Count of correct responses.}
+  \item{mrt_inc}{Mean reaction time for incogruent trials.}
+  \item{mrt_con}{Mean reaction time for congruent trials.}
   \item{cong_eff_rt}{Congruency effect of reaction time (RT), i.e., RT
     incongruency - RT congruency.}
+  \item{pc_inc}{Percent of correct for incogruent trials.}
+  \item{pc_con}{Percent of correct for congruent trials.}
   \item{cong_eff_pc}{Congruency effect of percent of correct (PC), i.e., PC
     congruency - PC incongruency.}
   \item{is_normal}{Checking result whether the data is normal.} }

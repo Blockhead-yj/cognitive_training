@@ -8,7 +8,12 @@
 #' @return A \code{data.frame} contains following values:
 #' \describe{
 #'   \item{count_correct}{Count of correct responses.}
+#'   \item{count_pure}{Count of correct responses per minute for pure blocks.}
+#'   \item{count_mixed}{Count of correct responses per minute for mixed blocks.}
 #'   \item{switch_cost_gen_count}{General switch cost (based on count of correct responses).}
+#'   \item{mrt_pure}{Mean reaction time for non-mixed blocks.}
+#'   \item{mrt_repeat}{Mean reaction time for repeat trials.}
+#'   \item{mrt_switch}{Mean reaction time for switch trials.}
 #'   \item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
 #'   \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
 #'   \item{is_normal}{Checking result whether the data is normal.} }
@@ -21,7 +26,12 @@ switchcost <- function(data, ...) {
     return(
       data.frame(
         count_correct = NA_real_,
+        count_pure = NA_real_,
+        count_mixed = NA_real_,
         switch_cost_gen_count = NA_real_,
+        mrt_pure = NA_real_,
+        mrt_repeat = NA_real_,
+        mrt_switch = NA_real_,
         switch_cost_gen_rt = NA_real_,
         switch_cost_spe_rt = NA_real_,
         is_normal = FALSE
@@ -46,8 +56,9 @@ switchcost <- function(data, ...) {
       dplyr::summarise(count_correct = sum(.data$acc_adj == 1)) %>%
       tidyr::pivot_wider(names_from = "Block", values_from = "count_correct") %>%
       dplyr::transmute(
-        switch_cost_gen_count = mean(c(.data$`1`, .data$`2`)) -
-          mean(c(.data$`3`, .data$`4`, .data$`5`))
+        count_pure = mean(c(.data$`1`, .data$`2`)),
+        count_mixed = mean(c(.data$`3`, .data$`4`, .data$`5`)),
+        switch_cost_gen_count = .data$count_pure - .data$count_mixed
       )
   } else if (n_blocks == 6) {
     switch_cost_count <- data_adj %>%
@@ -55,11 +66,16 @@ switchcost <- function(data, ...) {
       dplyr::summarise(count_correct = sum(.data$acc_adj == 1)) %>%
       tidyr::pivot_wider(names_from = "Block", values_from = "count_correct") %>%
       dplyr::transmute(
-        switch_cost_gen_count = sum(c(.data$`1`, .data$`2`)) -
-          mean(c(.data$`3`, .data$`4`, .data$`5`, .data$`6`))
+        count_pure = sum(c(.data$`1`, .data$`2`)),
+        count_mixed = mean(c(.data$`3`, .data$`4`, .data$`5`, .data$`6`)),
+        switch_cost_gen_count = .data$count_pure - .data$count_mixed
       )
   } else {
-    switch_cost_count <- data.frame(switch_cost_gen_count = NA_real_)
+    switch_cost_count <- data.frame(
+      count_pure = NA_real_,
+      count_mixed = NA_real_,
+      switch_cost_gen_count = NA_real_
+    )
   }
   switch_cost_rt <- data_adj %>%
     dplyr::filter(.data$type_adj != "") %>%
@@ -67,8 +83,11 @@ switchcost <- function(data, ...) {
     dplyr::summarise(mrt = mean(.data$RT[.data$acc_adj == 1])) %>%
     tidyr::pivot_wider(names_from = "type_adj", values_from = "mrt") %>%
     dplyr::transmute(
-      switch_cost_gen_rt = .data$Repeat - (.data$Color + .data$Shape) / 2,
-      switch_cost_spe_rt = .data$Switch - .data$Repeat
+      mrt_pure = (.data$Color + .data$Shape) / 2,
+      mrt_repeat = .data$Repeat,
+      mrt_switch = .data$Switch,
+      switch_cost_gen_rt = .data$mrt_repeat - .data$mrt_pure,
+      switch_cost_spe_rt = .data$mrt_switch - .data$mrt_repeat
     )
   is_normal <- data_adj %>%
     dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
