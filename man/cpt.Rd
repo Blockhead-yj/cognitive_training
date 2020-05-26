@@ -19,6 +19,7 @@ A \code{data.frame} contains following values:
   \item{hits}{Number of hits.}
   \item{commissions}{Number of errors caused by action.}
   \item{omissions}{Number of errors caused by inaction.}
+  \item{count_error}{Count of incorrect responses.}
   \item{mrt}{Mean reaction time of hits.}
   \item{rtsd}{Standard deviation of reaction times of hits.}
   \item{is_normal}{Checking result whether the data is normal.}

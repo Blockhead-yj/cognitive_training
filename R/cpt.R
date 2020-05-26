@@ -12,6 +12,7 @@
 #'   \item{hits}{Number of hits.}
 #'   \item{commissions}{Number of errors caused by action.}
 #'   \item{omissions}{Number of errors caused by inaction.}
+#'   \item{count_error}{Count of incorrect responses.}
 #'   \item{mrt}{Mean reaction time of hits.}
 #'   \item{rtsd}{Standard deviation of reaction times of hits.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
@@ -29,6 +30,7 @@ cpt <- function(data, ...) {
         hits = NA_real_,
         commissions = NA_real_,
         omissions = NA_real_,
+        count_error = NA_real_,
         mrt = NA_real_,
         rtsd = NA_real_,
         is_normal = FALSE
@@ -66,10 +68,11 @@ cpt <- function(data, ...) {
       ne = sum(.data$acc_adj == 0)
     ) %>%
     tidyr::pivot_wider(names_from = "type_adj", values_from = c("nc", "ne")) %>%
-    dplyr::select(
+    dplyr::transmute(
       hits = .data$nc_s,
       commissions = .data$ne_n,
-      omissions = .data$ne_s
+      omissions = .data$ne_s,
+      count_error = .data$ne_n + .data$ne_s
     )
   rt <- data_adj %>%
     dplyr::filter(.data$acc_adj == 1 & .data$type_adj == "s") %>%
