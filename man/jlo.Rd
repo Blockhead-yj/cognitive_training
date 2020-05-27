@@ -16,9 +16,11 @@ A \code{data.frame} contains following values:
 \describe{
   \item{count_correct}{Count of correct responses.}
   \item{sum_error}{Sum of the angle deviations.}
+  \item{sum_logerr}{Sum of the log of angle deviations.}
+  \item{sum_sqrterr}{Sum of the square root of angle deviations.}
   \item{is_normal}{Checking result whether the data is normal.}
 }
 }
 \description{
-This is just to find out the count of correct responses.
+Count of correct responses and other angle deviations indices.
 }

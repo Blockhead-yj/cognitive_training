@@ -14,7 +14,9 @@ nle(data, ...)
 \value{
 A \code{data.frame} contains following values:
 \describe{
-  \item{mean_err}{Mean percent absolute error.}
+  \item{mean_err}{Mean absolute error.}
+  \item{mean_logerr}{Mean log absolute error.}
+  \item{mean_sqrterr}{Mean square root of absolute error.}
   \item{is_normal}{Checking result whether the data is normal.}
 }
 }

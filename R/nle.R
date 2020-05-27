@@ -7,7 +7,9 @@
 #' @param ... Other input argument for future expansion.
 #' @return A \code{data.frame} contains following values:
 #' \describe{
-#'   \item{mean_err}{Mean percent absolute error.}
+#'   \item{mean_err}{Mean absolute error.}
+#'   \item{mean_logerr}{Mean log absolute error.}
+#'   \item{mean_sqrterr}{Mean square root of absolute error.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
 #' @importFrom magrittr %>%
@@ -19,11 +21,18 @@ nle <- function(data, ...) {
     return(
       data.frame(
         mean_err = NA_real_,
+        mean_logerr = NA_real_,
+        mean_sqrterr = NA_real_,
         is_normal = FALSE
       )
     )
   }
   data %>%
     dplyr::mutate(err = abs(.data$Number - .data$Resp)) %>%
-    dplyr::summarise(mean_err = mean(.data$err), is_normal = TRUE)
+    dplyr::summarise(
+      mean_err = mean(.data$err),
+      mean_logerr = mean(log(.data$err + 1)),
+      mean_sqrterr = mean(sqrt(.data$err)),
+      is_normal = TRUE
+    )
 }

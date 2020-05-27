@@ -1,6 +1,6 @@
 #' Calculates index scores for JLO game.
 #'
-#' This is just to find out the count of correct responses.
+#' Count of correct responses and other angle deviations indices.
 #'
 #' @param data Raw data of class \code{data.frame}.
 #' @param ... Other input argument for future expansion.
@@ -8,11 +8,12 @@
 #' \describe{
 #'   \item{count_correct}{Count of correct responses.}
 #'   \item{sum_error}{Sum of the angle deviations.}
+#'   \item{sum_logerr}{Sum of the log of angle deviations.}
+#'   \item{sum_sqrterr}{Sum of the square root of angle deviations.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-#' @importFrom rlang !!
 #' @export
 jlo <- function(data, ...) {
   if (!all(utils::hasName(data, c("Angle", "Resp", "ACC")))) {
@@ -21,6 +22,8 @@ jlo <- function(data, ...) {
       data.frame(
         count_correct = NA_real_,
         sum_error = NA_real_,
+        sum_logerr = NA_real_,
+        sum_sqrterr = NA_real_,
         is_normal = FALSE
       )
     )
@@ -44,6 +47,10 @@ jlo <- function(data, ...) {
         TRUE ~ .data$resp_adj * 6
       )
     ) %>%
-    dplyr::summarise(sum_error = sum(abs(.data$Angle - .data$resp_angle)))
+    dplyr::summarise(
+      sum_error = sum(abs(.data$Angle - .data$resp_angle)),
+      sum_logerr = sum(log(abs(.data$Angle - .data$resp_angle) + 1)),
+      sum_sqrterr = sum(sqrt(abs(.data$Angle - .data$resp_angle)))
+    )
   cbind(count_correct, sum_error, is_normal = TRUE)
 }
