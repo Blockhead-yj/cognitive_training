@@ -14,7 +14,10 @@ wxpred(data, ...)
 \value{
 A \code{data.frame} contains following values:
 \describe{
-  \item{pc_b1}{Percent of correct responses.}
+  \item{pc_b1}{Percent of correct responses for block 1.}
+  \item{pc_b2}{Percent of correct responses for block 2.}
+  \item{pc_b3}{Percent of correct responses for block 3.}
+  \item{pc_b4}{Percent of correct responses for block 4.}
   \item{is_normal}{Checking result whether the data is normal.}
 }
 }
