@@ -9,7 +9,6 @@
 #'   \item{mrt}{Mean reaction time}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 srt <- function(data, ...) {

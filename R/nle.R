@@ -12,7 +12,6 @@
 #'   \item{mean_sqrterr}{Mean square root of absolute error.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 nle <- function(data, ...) {

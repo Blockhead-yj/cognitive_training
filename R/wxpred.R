@@ -12,7 +12,6 @@
 #'   \item{pc_b4}{Percent of correct responses for block 4.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 wxpred <- function(data, ...) {

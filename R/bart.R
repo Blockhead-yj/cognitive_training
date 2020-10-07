@@ -10,7 +10,6 @@
 #'   \item{mean_hits_raw}{Mean of hits for all balloons.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 bart <- function(data, ...) {

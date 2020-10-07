@@ -17,7 +17,6 @@
 #'   \item{rtsd}{Standard deviation of reaction times of hits.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 cpt <- function(data, ...) {

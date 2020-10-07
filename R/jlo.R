@@ -12,7 +12,6 @@
 #'   \item{sum_sqrterr}{Sum of the square root of angle deviations.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 jlo <- function(data, ...) {

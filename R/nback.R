@@ -13,7 +13,6 @@
 #'   \item{c}{Bias.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 nback <- function(data, ...) {

@@ -17,7 +17,6 @@
 #'   \item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
 #'   \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
 #'   \item{is_normal}{Checking result whether the data is normal.} }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 switchcost <- function(data, ...) {
