@@ -13,7 +13,6 @@
 #'   \item{bps_score}{BPS score.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 bps <- function(data, ...) {

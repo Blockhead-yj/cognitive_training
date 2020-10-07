@@ -9,7 +9,6 @@
 #'   \item{still_ratio}{The ratio of still duration in yellow light state.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 driving <- function(data, ...) {

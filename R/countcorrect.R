@@ -9,7 +9,6 @@
 #'   \item{count_correct}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @importFrom rlang !!
 #' @export

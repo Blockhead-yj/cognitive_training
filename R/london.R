@@ -13,7 +13,6 @@
 #'   \item{mean_level}{Mean level reached.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 london <- function(data, ...) {

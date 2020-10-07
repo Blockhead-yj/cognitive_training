@@ -10,7 +10,6 @@
 #'   \item{pc}{Percent of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 assoclang <- function(data, ...) {

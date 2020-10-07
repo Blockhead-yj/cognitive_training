@@ -12,7 +12,6 @@
 #'   \item{mrt_mixadv}{Mean reaction decrease of Mixed stimuli compared to other two types of stimuli.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 multisense <- function(data, ...) {

@@ -10,7 +10,6 @@
 #'   \item{net_cor}{Net correct count.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' }
-#' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export
 schulte <- function(data, ...) {
