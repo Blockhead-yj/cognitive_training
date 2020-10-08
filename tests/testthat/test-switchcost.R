@@ -2,7 +2,7 @@ context("`switchcost` test")
 library(dataprocr2)
 test_that("`switchcost` should deal with normal and abnormal data", {
   result_names <- c(
-    "count_correct", "count_pure", "count_mixed", "switch_cost_gen_count",
+    "nc", "count_pure", "count_mixed", "switch_cost_gen_count",
     "mrt_pure", "mrt_repeat", "mrt_switch",
     "switch_cost_gen_rt", "switch_cost_spe_rt",
     "is_normal"
@@ -14,7 +14,7 @@ test_that("`switchcost` should deal with normal and abnormal data", {
     )
   )
   expect_named(result_old, result_names)
-  expect_equal(result_old$count_correct, 53)
+  expect_equal(result_old$nc, 53)
   expect_true(is.na(result_old$count_pure))
   expect_true(is.na(result_old$count_mixed))
   expect_true(is.na(result_old$switch_cost_gen_count))
@@ -31,7 +31,7 @@ test_that("`switchcost` should deal with normal and abnormal data", {
     )
   )
   expect_named(result_new5, result_names)
-  expect_equal(result_new5$count_correct, 47)
+  expect_equal(result_new5$nc, 47)
   expect_equal(result_new5$count_pure, 10)
   expect_equal(result_new5$count_mixed, 9)
   expect_equal(result_new5$switch_cost_gen_count, 1, tolerance = 0.1)
@@ -48,7 +48,7 @@ test_that("`switchcost` should deal with normal and abnormal data", {
     )
   )
   expect_named(result_new6, result_names)
-  expect_equal(result_new6$count_correct, 60)
+  expect_equal(result_new6$nc, 60)
   expect_equal(result_new6$count_pure, 14)
   expect_equal(result_new6$count_mixed, 11.5)
   expect_equal(result_new6$switch_cost_gen_count, 2.5, tolerance = 0.1)
@@ -64,7 +64,7 @@ test_that("`switchcost` should deal with normal and abnormal data", {
     "`Block`, `Type`, `ACC` and `RT` variables are required."
   )
   expect_named(result_abnormal, result_names)
-  expect_true(is.na(result_abnormal$count_correct))
+  expect_true(is.na(result_abnormal$nc))
   expect_true(is.na(result_abnormal$count_pure))
   expect_true(is.na(result_abnormal$count_mixed))
   expect_true(is.na(result_abnormal$switch_cost_gen_count))

@@ -8,7 +8,7 @@
 #' @return A `data.frame` contains following values:
 #'   \item{max_span}{Maximal span.}
 #'   \item{mean_span}{Mean span.}
-#'   \item{count_correct}{Count of correct responses.}
+#'   \item{nc}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @importFrom rlang !!
@@ -25,7 +25,7 @@ span <- function(data, ...) {
       data.frame(
         max_span = NA_real_,
         mean_span = NA_real_,
-        count_correct = NA_real_,
+        nc = NA_real_,
         is_normal = FALSE
       )
     )
@@ -58,12 +58,12 @@ span <- function(data, ...) {
     dplyr::summarise(
       mean_span = min(!!rlang::sym(len_var)) - 0.5 + sum(.data$pc)
     )
-  count_correct <- data %>%
+  nc <- data %>%
     dplyr::pull(!!acc_var) %>%
     paste(collapse = delim) %>%
     strsplit(delim) %>%
     unlist() %>%
     as.numeric() %>%
     sum()
-  cbind(span_indices, count_correct, is_normal = TRUE)
+  cbind(span_indices, nc, is_normal = TRUE)
 }

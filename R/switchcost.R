@@ -6,7 +6,7 @@
 #' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
 #' @return A `data.frame` contains following values:
-#'   \item{count_correct}{Count of correct responses.}
+#'   \item{nc}{Count of correct responses.}
 #'   \item{count_pure}{Count of correct responses per minute for pure blocks.}
 #'   \item{count_mixed}{Count of correct responses per minute for mixed blocks.}
 #'   \item{switch_cost_gen_count}{General switch cost (based on count of correct responses).}
@@ -23,7 +23,7 @@ switchcost <- function(data, ...) {
     warning("`Block`, `Type`, `ACC` and `RT` variables are required.")
     return(
       data.frame(
-        count_correct = NA_real_,
+        nc = NA_real_,
         count_pure = NA_real_,
         count_mixed = NA_real_,
         switch_cost_gen_count = NA_real_,
@@ -45,14 +45,14 @@ switchcost <- function(data, ...) {
       ),
       acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)
     )
-  count_correct <- data_adj %>%
-    dplyr::summarise(count_correct = sum(.data$acc_adj == 1))
+  nc <- data_adj %>%
+    dplyr::summarise(nc = sum(.data$acc_adj == 1))
   n_blocks <- dplyr::n_distinct(data_adj$Block)
   if (n_blocks == 5) {
     switch_cost_count <- data_adj %>%
       dplyr::group_by(.data$Block) %>%
-      dplyr::summarise(count_correct = sum(.data$acc_adj == 1)) %>%
-      tidyr::pivot_wider(names_from = "Block", values_from = "count_correct") %>%
+      dplyr::summarise(nc = sum(.data$acc_adj == 1)) %>%
+      tidyr::pivot_wider(names_from = "Block", values_from = "nc") %>%
       dplyr::transmute(
         count_pure = mean(c(.data$`1`, .data$`2`)),
         count_mixed = mean(c(.data$`3`, .data$`4`, .data$`5`)),
@@ -61,8 +61,8 @@ switchcost <- function(data, ...) {
   } else if (n_blocks == 6) {
     switch_cost_count <- data_adj %>%
       dplyr::group_by(.data$Block) %>%
-      dplyr::summarise(count_correct = sum(.data$acc_adj == 1)) %>%
-      tidyr::pivot_wider(names_from = "Block", values_from = "count_correct") %>%
+      dplyr::summarise(nc = sum(.data$acc_adj == 1)) %>%
+      tidyr::pivot_wider(names_from = "Block", values_from = "nc") %>%
       dplyr::transmute(
         count_pure = sum(c(.data$`1`, .data$`2`)),
         count_mixed = mean(c(.data$`3`, .data$`4`, .data$`5`, .data$`6`)),
@@ -88,7 +88,7 @@ switchcost <- function(data, ...) {
       switch_cost_spe_rt = .data$mrt_switch - .data$mrt_repeat
     )
   is_normal <- data_adj %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
+    dplyr::summarise(n = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
-  cbind(count_correct, switch_cost_count, switch_cost_rt, is_normal)
+  cbind(nc, switch_cost_count, switch_cost_rt, is_normal)
 }

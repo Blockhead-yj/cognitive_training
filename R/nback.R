@@ -56,7 +56,7 @@ nback <- function(data, ...) {
       c = -(stats::qnorm(.data$s) - stats::qnorm(.data$n)) / 2
     )
   is_normal <- data_adj %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
+    dplyr::summarise(n = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
   cbind(basic, sdt, is_normal)
 }

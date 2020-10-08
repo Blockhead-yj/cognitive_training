@@ -5,10 +5,10 @@
 #' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
 #' @return A `data.frame` contains following values:
-#'   \item{count_correct}{Count of correct responses.}
-#'   \item{sum_error}{Sum of the angle deviations.}
-#'   \item{sum_logerr}{Sum of the log of angle deviations.}
-#'   \item{sum_sqrterr}{Sum of the square root of angle deviations.}
+#'   \item{nc}{Count of correct responses.}
+#'   \item{ne}{Sum of the angle deviations.}
+#'   \item{ne_ln}{Sum of the log of angle deviations.}
+#'   \item{ne_sqrt}{Sum of the square root of angle deviations.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @export
@@ -17,17 +17,17 @@ jlo <- function(data, ...) {
     warning("`Angle`, `Resp` and `ACC` variables are required.")
     return(
       data.frame(
-        count_correct = NA_real_,
-        sum_error = NA_real_,
-        sum_logerr = NA_real_,
-        sum_sqrterr = NA_real_,
+        nc = NA_real_,
+        ne = NA_real_,
+        ne_ln = NA_real_,
+        ne_sqrt = NA_real_,
         is_normal = FALSE
       )
     )
   }
-  count_correct <- data %>%
-    dplyr::summarise(count_correct = sum(.data$ACC == 1))
-  sum_error <- data %>%
+  nc <- data %>%
+    dplyr::summarise(nc = sum(.data$ACC == 1))
+  ne <- data %>%
     dplyr::mutate(
       resp_adj = purrr::map_dbl(
         .data$Resp,
@@ -45,9 +45,9 @@ jlo <- function(data, ...) {
       )
     ) %>%
     dplyr::summarise(
-      sum_error = sum(abs(.data$Angle - .data$resp_angle)),
-      sum_logerr = sum(log(abs(.data$Angle - .data$resp_angle) + 1)),
-      sum_sqrterr = sum(sqrt(abs(.data$Angle - .data$resp_angle)))
+      ne = sum(abs(.data$Angle - .data$resp_angle)),
+      ne_ln = sum(log(abs(.data$Angle - .data$resp_angle) + 1)),
+      ne_sqrt = sum(sqrt(abs(.data$Angle - .data$resp_angle)))
     )
-  cbind(count_correct, sum_error, is_normal = TRUE)
+  cbind(nc, ne, is_normal = TRUE)
 }

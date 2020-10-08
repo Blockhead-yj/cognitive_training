@@ -7,7 +7,7 @@
 #' @param ... Other input argument for future expansion.
 #' @return A `data.frame` contains following values:
 #'   \item{mrt}{Mean reaction time}
-#'   \item{count_correct}{Count of correct responses}
+#'   \item{nc}{Count of correct responses}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @export
@@ -17,7 +17,7 @@ crt <- function(data, ...) {
     return(
       data.frame(
         mrt = NA_real_,
-        count_correct = NA_real_,
+        nc = NA_real_,
         is_normal = FALSE
       )
     )
@@ -25,7 +25,7 @@ crt <- function(data, ...) {
   data %>%
     dplyr::summarise(
       mrt = mean(.data$RT[.data$ACC == 1]),
-      count_correct = sum(.data$ACC == 1),
+      nc = sum(.data$ACC == 1),
       is_normal = TRUE
     )
 }

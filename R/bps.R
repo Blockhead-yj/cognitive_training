@@ -44,7 +44,7 @@ bps <- function(data, ...) {
   is_normal <- data %>%
     dplyr::filter(.data$Phase == "test") %>%
     dplyr::mutate(acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)) %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
+    dplyr::summarise(n = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
   cbind(pc_all, bps_score, is_normal)
 }

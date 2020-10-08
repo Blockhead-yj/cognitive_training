@@ -13,7 +13,7 @@ countcorrect(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\item{count_correct}{Count of correct responses.}
+\item{nc}{Count of correct responses.}
 \item{is_normal}{Checking result whether the data is normal.}
 }
 \description{

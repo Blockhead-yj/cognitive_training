@@ -2,7 +2,7 @@ context("`conflict` test")
 library(dataprocr2)
 test_that("`conflict` should deal with normal and abnormal data", {
   result_names <- c(
-    "count_correct",
+    "nc",
     "mrt_inc", "mrt_con", "cong_eff_rt",
     "pc_inc", "pc_con", "cong_eff_pc",
     "is_normal"
@@ -14,7 +14,7 @@ test_that("`conflict` should deal with normal and abnormal data", {
     )
   )
   expect_named(result_normal, result_names)
-  expect_equal(result_normal$count_correct, 65)
+  expect_equal(result_normal$nc, 65)
   expect_equal(result_normal$mrt_inc, 1224.5, tolerance = 0.1)
   expect_equal(result_normal$mrt_con, 1146.2, tolerance = 0.1)
   expect_equal(result_normal$cong_eff_rt, 78.31818, tolerance = 1e-5)
@@ -29,7 +29,7 @@ test_that("`conflict` should deal with normal and abnormal data", {
     )
   )
   expect_named(result_normal2, result_names)
-  expect_equal(result_normal2$count_correct, 79)
+  expect_equal(result_normal2$nc, 79)
   expect_equal(result_normal2$mrt_inc, 739.92, tolerance = 0.01)
   expect_equal(result_normal2$mrt_con, 727.25, tolerance = 0.01)
   expect_equal(result_normal2$cong_eff_rt, 12.67308, tolerance = 1e-5)
@@ -42,7 +42,7 @@ test_that("`conflict` should deal with normal and abnormal data", {
     "`Type`, `ACC` and `RT` variables are required."
   )
   expect_named(result_abnormal, result_names)
-  expect_true(is.na(result_abnormal$count_correct))
+  expect_true(is.na(result_abnormal$nc))
   expect_true(is.na(result_abnormal$mrt_inc))
   expect_true(is.na(result_abnormal$mrt_con))
   expect_true(is.na(result_abnormal$cong_eff_rt))

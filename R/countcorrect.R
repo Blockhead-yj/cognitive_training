@@ -5,7 +5,7 @@
 #' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
 #' @return A `data.frame` contains following values:
-#'   \item{count_correct}{Count of correct responses.}
+#'   \item{nc}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @importFrom rlang !!
@@ -16,7 +16,7 @@ countcorrect <- function(data, ...) {
   if (!any(acc_var_idx)) {
     warning("Accuracy related variable, i.e., `ACC` or `Repetition`, is required.")
     return(
-      data.frame(count_correct = NA_real_, is_normal = FALSE)
+      data.frame(nc = NA_real_, is_normal = FALSE)
     )
   }
   acc_var <- acc_vars[acc_var_idx]
@@ -30,5 +30,5 @@ countcorrect <- function(data, ...) {
       dplyr::mutate(acc_adj = !!rlang::sym(acc_var))
   }
   data_adj %>%
-    dplyr::summarise(count_correct = sum(.data$acc_adj == 1), is_normal = TRUE)
+    dplyr::summarise(nc = sum(.data$acc_adj == 1), is_normal = TRUE)
 }

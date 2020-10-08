@@ -6,7 +6,7 @@
 #' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
 #' @return A `data.frame` contains following values:
-#'   \item{count_correct}{Count of correct responses.}
+#'   \item{nc}{Count of correct responses.}
 #'   \item{mrt_inc}{Mean reaction time for incogruent trials.}
 #'   \item{mrt_con}{Mean reaction time for congruent trials.}
 #'   \item{cong_eff_rt}{Congruency effect of reaction time (RT), i.e., RT
@@ -23,7 +23,7 @@ conflict <- function(data, ...) {
     warning("`Type`, `ACC` and `RT` variables are required.")
     return(
       data.frame(
-        count_correct = NA_real_,
+        nc = NA_real_,
         mrt_inc = NA_real_,
         mrt_con = NA_real_,
         cong_eff_rt = NA_real_,
@@ -36,8 +36,8 @@ conflict <- function(data, ...) {
   }
   data_adj <- data %>%
     dplyr::mutate(acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L))
-  count_correct <- data_adj %>%
-    dplyr::summarise(count_correct = sum(.data$acc_adj == 1))
+  nc <- data_adj %>%
+    dplyr::summarise(nc = sum(.data$acc_adj == 1))
   cong_eff <- data_adj %>%
     dplyr::group_by(.data$Type) %>%
     dplyr::summarise(
@@ -54,7 +54,7 @@ conflict <- function(data, ...) {
       cong_eff_pc = .data$pc_Congruent - .data$pc_Incongruent
     )
   is_normal <- data_adj %>%
-    dplyr::summarise(n = dplyr::n(), count_correct = sum(.data$acc_adj == 1)) %>%
+    dplyr::summarise(n = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
     dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
-  cbind(count_correct, cong_eff, is_normal)
+  cbind(nc, cong_eff, is_normal)
 }

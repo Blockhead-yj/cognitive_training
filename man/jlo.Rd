@@ -13,10 +13,10 @@ jlo(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\item{count_correct}{Count of correct responses.}
-\item{sum_error}{Sum of the angle deviations.}
-\item{sum_logerr}{Sum of the log of angle deviations.}
-\item{sum_sqrterr}{Sum of the square root of angle deviations.}
+\item{nc}{Count of correct responses.}
+\item{ne}{Sum of the angle deviations.}
+\item{ne_ln}{Sum of the log of angle deviations.}
+\item{ne_sqrt}{Sum of the square root of angle deviations.}
 \item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
