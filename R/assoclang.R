@@ -11,6 +11,7 @@
 #' @importFrom rlang .data
 #' @export
 assoclang <- function(data, ...) {
+  .Deprecated("countcorrect")
   if (!all(utils::hasName(data, "Correctness"))) {
     warning("`Correctness` variable is required.")
     return(
