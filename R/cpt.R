@@ -78,7 +78,7 @@ cpt <- function(data, ...) {
       rtsd = stats::sd(.data$RT)
     )
   is_normal <- data_adj %>%
-    dplyr::summarise(n = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
-    dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
+    dplyr::summarise(nt = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
+    dplyr::transmute(is_normal = .data$nc > stats::qbinom(0.95, .data$nt, 0.5))
   cbind(sdt, counts, rt, is_normal)
 }

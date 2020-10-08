@@ -54,7 +54,7 @@ conflict <- function(data, ...) {
       cong_eff_pc = .data$pc_Congruent - .data$pc_Incongruent
     )
   is_normal <- data_adj %>%
-    dplyr::summarise(n = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
-    dplyr::transmute(is_normal = .data$n > stats::qbinom(0.95, .data$n, 0.5))
+    dplyr::summarise(nt = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
+    dplyr::transmute(is_normal = .data$nc > stats::qbinom(0.95, .data$nt, 0.5))
   cbind(nc, cong_eff, is_normal)
 }
