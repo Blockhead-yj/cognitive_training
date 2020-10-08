@@ -2,17 +2,15 @@
 #'
 #' The index was developed by Stark et. al. (2013), named as "BPS score".
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{pc}{Percent of correct responses.}
 #'   \item{p_sim_lure}{Percent of similar responses for "lure" stimuli.}
 #'   \item{p_sim_foil}{Percent of similar responses for "foil" stimuli.}
 #'   \item{p_sim_old}{Percent of similar responses for "target" (i.e., "old") stimuli.}
 #'   \item{bps_score}{BPS score.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 bps <- function(data, ...) {

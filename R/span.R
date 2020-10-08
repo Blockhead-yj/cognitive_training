@@ -3,15 +3,13 @@
 #' Three indices are returned: maximal span, mean span and count of correct
 #' responses.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{max_span}{Maximal span.}
 #'   \item{mean_span}{Mean span.}
 #'   \item{count_correct}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @importFrom rlang !!
 #' @export

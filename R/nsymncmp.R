@@ -3,15 +3,13 @@
 #' Several values including percentage of correct responses (pc), mean reaction
 #' time (mrt), weber fraction (w).
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{pc}{Percentage of correct responses.}
 #'   \item{mrt}{Mean reaction time.}
 #'   \item{w}{Weber fraction.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 nsymncmp <- function(data, ...) {

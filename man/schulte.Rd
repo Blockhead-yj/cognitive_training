@@ -13,10 +13,8 @@ schulte(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{net_cor}{Net correct count.}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{net_cor}{Net correct count.}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 The net count of correct responses (net_cor) is returned, which is just the

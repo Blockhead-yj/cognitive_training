@@ -3,10 +3,9 @@
 #' Count of correct responses and congruency effect of correct response and
 #' reaction time are all included.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{count_correct}{Count of correct responses.}
 #'   \item{count_pure}{Count of correct responses per minute for pure blocks.}
 #'   \item{count_mixed}{Count of correct responses per minute for mixed blocks.}
@@ -16,7 +15,7 @@
 #'   \item{mrt_switch}{Mean reaction time for switch trials.}
 #'   \item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
 #'   \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
-#'   \item{is_normal}{Checking result whether the data is normal.} }
+#'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @export
 switchcost <- function(data, ...) {

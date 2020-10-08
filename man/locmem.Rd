@@ -13,11 +13,9 @@ locmem(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{mean_dist}{Mean distance.}
-  \item{pc}{Percentage of correct responses.}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{mean_dist}{Mean distance.}
+\item{pc}{Percentage of correct responses.}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 Mean distance and percentage of correct responses are returned.

@@ -3,16 +3,14 @@
 #' Several values including percentage of correct responses (pc), mean reaction
 #' time (mrt), sensitivity index (i.e, d') and bias (c).
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{pc}{Percentage of correct responses.}
 #'   \item{mrt}{Mean reaction time.}
 #'   \item{dprime}{Sensitivity index.}
 #'   \item{c}{Bias.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 nback <- function(data, ...) {

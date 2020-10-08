@@ -3,10 +3,9 @@
 #' Count of correct responses and congruency effect of correct response and
 #' reaction time are all included.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{count_correct}{Count of correct responses.}
 #'   \item{mrt_inc}{Mean reaction time for incogruent trials.}
 #'   \item{mrt_con}{Mean reaction time for congruent trials.}
@@ -16,7 +15,7 @@
 #'   \item{pc_con}{Percent of correct for congruent trials.}
 #'   \item{cong_eff_pc}{Congruency effect of percent of correct (PC), i.e., PC
 #'     congruency - PC incongruency.}
-#'   \item{is_normal}{Checking result whether the data is normal.} }
+#'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @export
 conflict <- function(data, ...) {

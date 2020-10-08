@@ -16,9 +16,9 @@ test_normal <- function(test_fun, data_file, result_file, ..., tolerance = 1e-3)
 }
 #' Test on abnormal data input
 #'
-#' The abnormal data input used here is just an empty \code{data.frame}. The
-#' expected result of call will have all \code{NA} values but one
-#' \code{is_normal} variable with value of \code{FALSE}.
+#' The abnormal data input used here is just an empty `data.frame`. The
+#' expected result of call will have all `NA` values but one
+#' `is_normal` variable with value of `FALSE`.
 test_abnormal <- function(test_fun, result_file, warn_msg, ...) {
   expect_warning(result <- test_fun(data.frame(), ...), warn_msg)
   expect_result <- jsonlite::read_json(result_file, simplifyVector = TRUE)

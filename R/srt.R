@@ -2,13 +2,11 @@
 #'
 #' Mean reaction time is returned.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{mrt}{Mean reaction time}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 srt <- function(data, ...) {

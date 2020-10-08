@@ -13,10 +13,8 @@ srt(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{mrt}{Mean reaction time}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{mrt}{Mean reaction time}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 Mean reaction time is returned.

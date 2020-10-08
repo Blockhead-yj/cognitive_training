@@ -2,13 +2,11 @@
 #'
 #' Caculcate the ratio of still duration in yellow light state.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{still_ratio}{The ratio of still duration in yellow light state.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 driving <- function(data, ...) {

@@ -4,17 +4,15 @@
 #' p(old|lure) - p(old|foil)) and fm_dprime (false memory d', i.e.,
 #' z(p(old|lure)) - z(p(old|foil)))
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{pc}{Percent of correct responses.}
 #'   \item{p_old_lure}{Percent of old response for "lure" stimuli.}
 #'   \item{p_old_foil}{Percent of old response for "foil" stimuli.}
 #'   \item{fm_ratio}{False memory ratio.}
 #'   \item{fm_dprime}{False memory d'.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 drm <- function(data, ...) {

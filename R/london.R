@@ -4,15 +4,13 @@
 #' score (defined as the mean of the ratios between best steps and actual steps)
 #' and mean level.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{tscore}{Total score defined by the game itself.}
 #'   \item{ratio_score}{Mean of the ratio between best steps and actual steps.}
 #'   \item{mean_level}{Mean level reached.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 london <- function(data, ...) {

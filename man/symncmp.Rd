@@ -13,13 +13,11 @@ symncmp(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{pc}{Percentage of correct responses.}
-  \item{mrt}{Mean reaction time.}
-  \item{dist_eff}{Distance effect.}
-  \item{dist_eff_adj}{Adjusted distance effect.}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{pc}{Percentage of correct responses.}
+\item{mrt}{Mean reaction time.}
+\item{dist_eff}{Distance effect.}
+\item{dist_eff_adj}{Adjusted distance effect.}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 Several values including percentage of correct responses (pc), mean reaction

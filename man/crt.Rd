@@ -13,11 +13,9 @@ crt(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{mrt}{Mean reaction time}
-  \item{count_correct}{Count of correct responses}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{mrt}{Mean reaction time}
+\item{count_correct}{Count of correct responses}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 Now we majorly consider two indices: mean reaction time and count of correct

@@ -3,10 +3,9 @@
 #' Many indices are returned: d', c (i.e., bias), hits, commissions, ommissions,
 #' mean reaction time (mrt), standard deviation of reaction times (rtsd).
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{dprime}{Sensitivity (d').}
 #'   \item{c}{Bias index.}
 #'   \item{hits}{Number of hits.}
@@ -16,7 +15,6 @@
 #'   \item{mrt}{Mean reaction time of hits.}
 #'   \item{rtsd}{Standard deviation of reaction times of hits.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 cpt <- function(data, ...) {

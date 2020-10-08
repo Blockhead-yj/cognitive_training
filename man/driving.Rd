@@ -13,10 +13,8 @@ driving(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{still_ratio}{The ratio of still duration in yellow light state.}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{still_ratio}{The ratio of still duration in yellow light state.}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 Caculcate the ratio of still duration in yellow light state.

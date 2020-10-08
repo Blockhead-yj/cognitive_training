@@ -2,14 +2,12 @@
 #'
 #' The count of correct responses is returned.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{count_correct}{Count of correct responses.}
 #'   \item{pc}{Percent of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 assoclang <- function(data, ...) {

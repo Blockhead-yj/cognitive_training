@@ -13,10 +13,8 @@ countcorrect(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\describe{
-  \item{count_correct}{Count of correct responses.}
-  \item{is_normal}{Checking result whether the data is normal.}
-}
+\item{count_correct}{Count of correct responses.}
+\item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
 This is just to find out the count of correct responses.

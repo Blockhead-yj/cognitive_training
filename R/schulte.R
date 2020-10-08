@@ -3,13 +3,11 @@
 #' The net count of correct responses (net_cor) is returned, which is just the
 #' difference of the count of correct responses and error responses.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{net_cor}{Net correct count.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 schulte <- function(data, ...) {

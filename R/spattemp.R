@@ -4,14 +4,12 @@
 #' difference with \code{\link{locmem}} is that this function takes order
 #' accuracy (thus temporal) into consideration.
 #'
-#' @param data Raw data of class \code{data.frame}.
+#' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
-#' @return A \code{data.frame} contains following values:
-#' \describe{
+#' @return A `data.frame` contains following values:
 #'   \item{mean_dist}{Mean distance.}
 #'   \item{pc}{Percentage of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' }
 #' @importFrom rlang .data
 #' @export
 spattemp <- function(data, ...) {
