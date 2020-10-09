@@ -26,5 +26,6 @@ congruency - PC incongruency.}
 }
 \description{
 Count of correct responses and congruency effect of correct response and
-reaction time are all included.
+reaction time are all included. After \code{dataprocr2} version 0.0.4 (included),
+this function will not work and \code{\link[=congeff]{congeff()}} works instead.
 }
