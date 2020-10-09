@@ -2,7 +2,7 @@
 % Please edit documentation in R/dualtask.R
 \name{dualtask}
 \alias{dualtask}
-\title{Calculates index scores for dual task paradigm.}
+\title{Calculates index scores for dual task paradigm}
 \usage{
 dualtask(data, ...)
 }
@@ -25,5 +25,9 @@ A \code{data.frame} contains following values:
 \item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
-This is just to find out the count of correct responses.
+In the simplified (only dual task block included) dual task paradigm, users
+are required to complete two tasks spontaneously, one at the left side, and
+the other at the right side. Mean reaction time (\code{mrt}), count of
+correct responses (\code{nc}) and sensitivity index (\code{dprime}) for left side,
+right side and both side are calculated.
 }

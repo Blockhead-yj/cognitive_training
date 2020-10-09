@@ -1,6 +1,10 @@
-#' Calculates index scores for dual task paradigm.
+#' Calculates index scores for dual task paradigm
 #'
-#' This is just to find out the count of correct responses.
+#' In the simplified (only dual task block included) dual task paradigm, users
+#' are required to complete two tasks spontaneously, one at the left side, and
+#' the other at the right side. Mean reaction time (`mrt`), count of
+#' correct responses (`nc`) and sensitivity index (`dprime`) for left side,
+#' right side and both side are calculated.
 #'
 #' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
