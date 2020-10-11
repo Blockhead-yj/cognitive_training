@@ -17,6 +17,11 @@ test_normal <- function(test_fun, data_file, result_file, ...) {
   for (index in names(expect_result)) {
     cur_val <- result[[index]]
     cur_exp <- expect_result[[index]]
+    # values of NA (any mode) and NaN are treated as the same
+    if (is.na(cur_exp)) {
+      expect_true(is.na(cur_val))
+      next
+    }
     # the precision is set as the same as that in the expect result file
     tol_digit <- 0
     if (is.double(cur_exp)) {
