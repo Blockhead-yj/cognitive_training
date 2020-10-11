@@ -6,19 +6,27 @@
 \usage{
 calc_switch_cost(
   data,
+  config_block,
   name_block = "Block",
   name_task = "Task",
-  name_switch = "TaskType",
+  name_switch = "Type",
   name_rt = "RT",
   name_acc = "ACC",
-  values_pure = c("", "Pure"),
-  values_mixed = c("Repeat", "Switch"),
-  dur_pure = 0.5,
-  dur_mixed = 1
+  values_mixed = c("Repeat", "Switch")
 )
 }
 \arguments{
-\item{data}{A \code{data.frame} from which the indices are calculated.}
+\item{data}{Required. A \code{data.frame} from which the indices are calculated.}
+
+\item{config_block}{Required. A \code{data.frame} contains the configurations of
+each block. At least contains these variables:
+\itemize{
+\item \code{Block}: The block identifier.
+\item \code{has_no_response}: Logical value indicating whether this block has no
+valid responses or not.
+\item \code{type_block}: The type of each block: "pure" or "mixed".
+\item \code{dur}: The duration in minutes for each block.
+}}
 
 \item{name_block}{The name of the variable in \code{data} storing block number.}
 
@@ -30,15 +38,9 @@ calc_switch_cost(
 
 \item{name_acc}{The name of the variable in \code{data} storing accuracy data.}
 
-\item{values_pure}{The values of the variable \code{name_switch} in pure blocks.}
-
 \item{values_mixed}{The values of the variable \code{name_switch} in mixed
 blocks, in which the first is about 'repeat', and the second about
 'switch'.}
-
-\item{dur_pure}{The duration in minutes for pure blocks.}
-
-\item{dur_mixed}{The duration in minutes for mixed blocks.}
 }
 \description{
 Utility function to calculate indices related to switch cost.

@@ -38,59 +38,50 @@ calc_cong_eff <- function(data,
 #'
 #' Utility function to calculate indices related to switch cost.
 #'
-#' @param data A `data.frame` from which the indices are calculated.
+#' @param data Required. A `data.frame` from which the indices are calculated.
+#' @param config_block Required. A `data.frame` contains the configurations of
+#'   each block. At least contains these variables:
+#'   * `Block`: The block identifier.
+#'   * `has_no_response`: Logical value indicating whether this block has no
+#'     valid responses or not.
+#'   * `type_block`: The type of each block: "pure" or "mixed".
+#'   * `dur`: The duration in minutes for each block.
 #' @param name_block The name of the variable in `data` storing block number.
 #' @param name_task The name of variable in `data` storing task info.
 #' @param name_switch The name of the variable in `data` storing switch info.
 #' @param name_rt The name of the variable in `data` storing reaction time data.
 #' @param name_acc The name of the variable in `data` storing accuracy data.
-#' @param values_pure The values of the variable `name_switch` in pure blocks.
 #' @param values_mixed The values of the variable `name_switch` in mixed
 #'   blocks, in which the first is about 'repeat', and the second about
 #'   'switch'.
-#' @param dur_pure The duration in minutes for pure blocks.
-#' @param dur_mixed The duration in minutes for mixed blocks.
 #' @importFrom rlang .data
 calc_switch_cost <- function(data,
+                             config_block,
                              name_block = "Block",
                              name_task = "Task",
                              name_switch = "Type",
                              name_rt = "RT",
                              name_acc = "ACC",
-                             values_pure = c("", "Pure"),
-                             values_mixed = c("Repeat", "Switch"),
-                             dur_pure = 0.5,
-                             dur_mixed = 1) {
-  data_tmp <- data %>%
-    dplyr::mutate(
-      type_block = dplyr::if_else(
-        .data[[name_switch]] %in% values_pure,
-        "pure", "mixed"
-      )
-    )
-  switch_cost_count <- data_tmp %>%
+                             values_mixed = c("Repeat", "Switch")) {
+  switch_cost_count <- data %>%
+    dplyr::left_join(config_block, by = name_block) %>%
     dplyr::group_by(.data$type_block, .data[[name_block]]) %>%
-    dplyr::summarise(nc = sum(.data[[name_acc]])) %>%
-    dplyr::transmute(
-      # rate of correct responses per minute
-      rc = dplyr::case_when(
-        .data$type_block == "pure" ~ .data$nc / dur_pure,
-        .data$type_block == "mixed" ~ .data$nc / dur_mixed
-      )
-    ) %>%
+    dplyr::filter(!.data$has_no_response) %>%
+    dplyr::summarise(rc = sum((.data[[name_acc]] == 1) / .data$dur)) %>%
     dplyr::summarise(rc = mean(.data$rc)) %>%
     tidyr::pivot_wider(
-      names_from = "type_block", values_from = "rc", names_prefix = "rc_"
+      names_from = "type_block",
+      values_from = "rc",
+      names_prefix = "rc_"
     ) %>%
     dplyr::mutate(
       switch_cost_rc_gen = .data$rc_pure - .data$rc_mixed
     )
-  switch_cost_rt <- data_tmp %>%
-    # include both valid mixed and pure (used in general switch cost) trials
-    dplyr::filter(.data[[name_switch]] %in% c(values_mixed, values_pure)) %>%
+  switch_cost_rt <- data %>%
+    dplyr::left_join(config_block, by = name_block) %>%
     dplyr::mutate(
       type_rt = dplyr::if_else(
-        .data[[name_switch]] %in% values_pure,
+        .data$type_block == "pure",
         .data[[name_task]],
         .data[[name_switch]]
       )
