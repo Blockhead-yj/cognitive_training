@@ -6,89 +6,74 @@
 #' @param data Raw data of class `data.frame`.
 #' @param ... Other input argument for future expansion.
 #' @return A `data.frame` contains following values:
-#'   \item{nc}{Count of correct responses.}
-#'   \item{count_pure}{Count of correct responses per minute for pure blocks.}
-#'   \item{count_mixed}{Count of correct responses per minute for mixed blocks.}
-#'   \item{switch_cost_gen_count}{General switch cost (based on count of correct responses).}
+#'   \item{rc_pure}{Count of correct responses per minute for pure blocks.}
+#'   \item{rc_mixed}{Count of correct responses per minute for mixed blocks.}
+#'   \item{switch_cost_rc_gen}{General switch cost (based on count of correct
+#'     responses).}
 #'   \item{mrt_pure}{Mean reaction time for non-mixed blocks.}
 #'   \item{mrt_repeat}{Mean reaction time for repeat trials.}
 #'   \item{mrt_switch}{Mean reaction time for switch trials.}
-#'   \item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
-#'   \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
+#'   \item{switch_cost_gen_rt}{General switch cost (based on mean reation
+#'     times).}
+#'   \item{switch_cost_spe_rt}{Specific switch cost (based on mean reation
+#'     times).}
+#'   \item{nc}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
 #' @importFrom rlang .data
 #' @export
 switchcost <- function(data, ...) {
-  if (!all(utils::hasName(data, c("Block", "Type", "ACC", "RT")))) {
-    warning("`Block`, `Type`, `ACC` and `RT` variables are required.")
+  if (!all(utils::hasName(data, c("Block", "Task", "Type", "ACC", "RT")))) {
+    warning("`Block`, `Task`, `Type`, `ACC` and `RT` variables are required.")
     return(
       data.frame(
-        nc = NA_real_,
-        count_pure = NA_real_,
-        count_mixed = NA_real_,
-        switch_cost_gen_count = NA_real_,
-        mrt_pure = NA_real_,
-        mrt_repeat = NA_real_,
-        mrt_switch = NA_real_,
-        switch_cost_gen_rt = NA_real_,
-        switch_cost_spe_rt = NA_real_,
+        rc_pure = NA,
+        rc_mixed = NA,
+        switch_cost_rc_gen = NA,
+        mrt_pure = NA,
+        mrt_repeat = NA,
+        mrt_switch = NA,
+        switch_cost_rt_gen = NA,
+        switch_cost_rt_spe = NA,
+        nc = NA,
         is_normal = FALSE
       )
     )
   }
-  data_adj <- data %>%
+  # summarize information of each block
+  block_info <- data %>%
+    dplyr::mutate(n_blocks = dplyr::n_distinct(.data$Block)) %>%
+    dplyr::group_by(.data$n_blocks, .data$Block) %>%
+    dplyr::summarise(
+      has_no_response = all(.data$ACC == -1),
+      type_block = ifelse(
+        is.na(.data$Type) |
+          .data$Type %in% c("preswitch", "postswitch", "Pure", ""),
+        "pure", "mixed"
+      ) %>%
+        unique(),
+      .groups = "drop"
+    ) %>%
     dplyr::mutate(
-      type_adj = dplyr::case_when(
-        .data$Type %in% c("Repeat", "Switch") ~ .data$Type,
-        .data$Type == "Filler" ~ "",
-        TRUE ~  .data$Task
-      ),
-      acc_adj = dplyr::if_else(.data$RT >= 100, .data$ACC, 0L)
-    )
-  nc <- data_adj %>%
-    dplyr::summarise(nc = sum(.data$acc_adj == 1))
-  n_blocks <- dplyr::n_distinct(data_adj$Block)
-  if (n_blocks == 5) {
-    switch_cost_count <- data_adj %>%
-      dplyr::group_by(.data$Block) %>%
-      dplyr::summarise(nc = sum(.data$acc_adj == 1)) %>%
-      tidyr::pivot_wider(names_from = "Block", values_from = "nc") %>%
-      dplyr::transmute(
-        count_pure = mean(c(.data$`1`, .data$`2`)),
-        count_mixed = mean(c(.data$`3`, .data$`4`, .data$`5`)),
-        switch_cost_gen_count = .data$count_pure - .data$count_mixed
+      dur = dplyr::case_when(
+        .data$n_blocks == 5 ~ 1,
+        .data$n_blocks >= 6 & .data$type_block == "pure" ~ 0.5,
+        .data$n_blocks >= 6 & .data$type_block == "mixed" ~ 1,
+        TRUE ~ NA_real_
       )
-  } else if (n_blocks == 6) {
-    switch_cost_count <- data_adj %>%
-      dplyr::group_by(.data$Block) %>%
-      dplyr::summarise(nc = sum(.data$acc_adj == 1)) %>%
-      tidyr::pivot_wider(names_from = "Block", values_from = "nc") %>%
-      dplyr::transmute(
-        count_pure = sum(c(.data$`1`, .data$`2`)),
-        count_mixed = mean(c(.data$`3`, .data$`4`, .data$`5`, .data$`6`)),
-        switch_cost_gen_count = .data$count_pure - .data$count_mixed
-      )
-  } else {
-    switch_cost_count <- data.frame(
-      count_pure = NA_real_,
-      count_mixed = NA_real_,
-      switch_cost_gen_count = NA_real_
     )
-  }
-  switch_cost_rt <- data_adj %>%
-    dplyr::filter(.data$type_adj != "") %>%
-    dplyr::group_by(.data$type_adj) %>%
-    dplyr::summarise(mrt = mean(.data$RT[.data$acc_adj == 1])) %>%
-    tidyr::pivot_wider(names_from = "type_adj", values_from = "mrt") %>%
-    dplyr::transmute(
-      mrt_pure = (.data$Color + .data$Shape) / 2,
-      mrt_repeat = .data$Repeat,
-      mrt_switch = .data$Switch,
-      switch_cost_gen_rt = .data$mrt_repeat - .data$mrt_pure,
-      switch_cost_spe_rt = .data$mrt_switch - .data$mrt_repeat
-    )
-  is_normal <- data_adj %>%
+  data_adj <- data %>%
+    # set as wrong for responses that are too quick
+    dplyr::mutate(acc_adj = ifelse(.data$RT >= 100, .data$ACC, 0))
+  switch_cost <- calc_switch_cost(
+    data_adj, block_info,
+    name_acc = "acc_adj"
+  )
+  nc_and_validation <- data_adj %>%
     dplyr::summarise(nt = dplyr::n(), nc = sum(.data$acc_adj == 1)) %>%
-    dplyr::transmute(is_normal = .data$nc > stats::qbinom(0.95, .data$nt, 0.5))
-  cbind(nc, switch_cost_count, switch_cost_rt, is_normal)
+    dplyr::transmute(
+      .data$nc,
+      is_normal = .data$nc > stats::qbinom(0.95, .data$nt, 0.5) ||
+        any(block_info$has_no_response)
+    )
+  cbind(switch_cost, nc_and_validation)
 }

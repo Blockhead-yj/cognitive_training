@@ -13,15 +13,18 @@ switchcost(data, ...)
 }
 \value{
 A \code{data.frame} contains following values:
-\item{nc}{Count of correct responses.}
-\item{count_pure}{Count of correct responses per minute for pure blocks.}
-\item{count_mixed}{Count of correct responses per minute for mixed blocks.}
-\item{switch_cost_gen_count}{General switch cost (based on count of correct responses).}
+\item{rc_pure}{Count of correct responses per minute for pure blocks.}
+\item{rc_mixed}{Count of correct responses per minute for mixed blocks.}
+\item{switch_cost_rc_gen}{General switch cost (based on count of correct
+responses).}
 \item{mrt_pure}{Mean reaction time for non-mixed blocks.}
 \item{mrt_repeat}{Mean reaction time for repeat trials.}
 \item{mrt_switch}{Mean reaction time for switch trials.}
-\item{switch_cost_gen_rt}{General switch cost (based on mean reation times).}
-\item{switch_cost_spe_rt}{Specific switch cost (based on mean reation times).}
+\item{switch_cost_gen_rt}{General switch cost (based on mean reation
+times).}
+\item{switch_cost_spe_rt}{Specific switch cost (based on mean reation
+times).}
+\item{nc}{Count of correct responses.}
 \item{is_normal}{Checking result whether the data is normal.}
 }
 \description{
