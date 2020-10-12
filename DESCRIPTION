@@ -16,7 +16,8 @@ Imports:
     purrr,
     stringr,
     jsonlite,
-    rlang (>= 0.1.2)
+    rlang (>= 0.1.2),
+    tibble
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/psychelzh/dataprocr2
