@@ -10,7 +10,6 @@
 #'   \item{mean_dist}{Mean distance.}
 #'   \item{pc}{Percentage of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 spattemp <- function(data, ...) {
   if (!all(utils::hasName(data, c("RespAccOrder", "RespLocDist")))) {

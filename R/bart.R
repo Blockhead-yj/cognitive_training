@@ -8,7 +8,6 @@
 #'   \item{mean_hits}{Mean of hits for balloons not exploded.}
 #'   \item{mean_hits_raw}{Mean of hits for all balloons.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 bart <- function(data, ...) {
   if (!all(utils::hasName(data, c("NHit", "Feedback")))) {

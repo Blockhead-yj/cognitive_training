@@ -16,7 +16,6 @@
 #'     congruency - PC incongruency.}
 #'   \item{nc}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 congeff <- function(data, ...) {
   if (!all(utils::hasName(data, c("Type", "ACC", "RT")))) {

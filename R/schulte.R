@@ -8,7 +8,6 @@
 #' @return A `data.frame` contains following values:
 #'   \item{net_cor}{Net correct count.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 schulte <- function(data, ...) {
   if (!all(utils::hasName(data, c("NCorrect", "NError")))) {

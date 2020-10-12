@@ -11,7 +11,6 @@
 #'   \item{dprime}{Sensitivity index.}
 #'   \item{c}{Bias.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 nback <- function(data, ...) {
   if (!all(utils::hasName(data, c("Type", "RT", "ACC")))) {

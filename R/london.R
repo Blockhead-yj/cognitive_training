@@ -11,7 +11,6 @@
 #'   \item{ratio_score}{Mean of the ratio between best steps and actual steps.}
 #'   \item{mean_level}{Mean level reached.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 london <- function(data, ...) {
   if (!all(utils::hasName(data, c("LeveL", "Score", "Outcome")))) {

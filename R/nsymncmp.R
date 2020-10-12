@@ -10,7 +10,6 @@
 #'   \item{mrt}{Mean reaction time.}
 #'   \item{w}{Weber fraction.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 nsymncmp <- function(data, ...) {
   if (!all(utils::hasName(data, c("BigSetCount", "SmallSetCount", "RT", "ACC")))) {

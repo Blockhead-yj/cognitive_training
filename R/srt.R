@@ -7,7 +7,6 @@
 #' @return A `data.frame` contains following values:
 #'   \item{mrt}{Mean reaction time}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 srt <- function(data, ...) {
   if (!all(utils::hasName(data, "RT"))) {

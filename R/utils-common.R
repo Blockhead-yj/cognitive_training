@@ -9,7 +9,6 @@
 #' @param name_acc The name of the variable in `data` storing accuracy data.
 #' @param values_cong The values of the congruency info variable, in which the
 #'   first is about 'congruent', and the second about 'incongruent'.
-#' @importFrom rlang .data
 calc_cong_eff <- function(data,
                           name_cong = "Type",
                           name_rt = "RT",
@@ -54,7 +53,6 @@ calc_cong_eff <- function(data,
 #' @param values_mixed The values of the variable `name_switch` in mixed
 #'   blocks, in which the first is about 'repeat', and the second about
 #'   'switch'.
-#' @importFrom rlang .data
 calc_switch_cost <- function(data,
                              config_block,
                              name_block = "Block",

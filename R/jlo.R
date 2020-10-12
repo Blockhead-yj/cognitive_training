@@ -10,7 +10,6 @@
 #'   \item{ne_ln}{Sum of the log of angle deviations.}
 #'   \item{ne_sqrt}{Sum of the square root of angle deviations.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 jlo <- function(data, ...) {
   if (!all(utils::hasName(data, c("Angle", "Resp", "ACC")))) {

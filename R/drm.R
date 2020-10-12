@@ -13,7 +13,6 @@
 #'   \item{fm_ratio}{False memory ratio.}
 #'   \item{fm_dprime}{False memory d'.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 drm <- function(data, ...) {
   if (!all(utils::hasName(data, c("Type", "RT", "ACC")))) {

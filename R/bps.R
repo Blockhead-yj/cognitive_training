@@ -11,7 +11,6 @@
 #'   \item{p_sim_old}{Percent of similar responses for "target" (i.e., "old") stimuli.}
 #'   \item{bps_score}{BPS score.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 bps <- function(data, ...) {
   if (!all(utils::hasName(data, c("Phase", "Resp", "Type", "RT", "ACC")))) {

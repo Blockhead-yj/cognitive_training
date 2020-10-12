@@ -12,7 +12,6 @@
 #'   \item{dist_eff}{Distance effect.}
 #'   \item{dist_eff_adj}{Adjusted distance effect.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 symncmp <- function(data, ...) {
   if (!all(utils::hasName(data, c("Small", "Big", "RT", "ACC")))) {

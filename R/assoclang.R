@@ -8,7 +8,6 @@
 #'   \item{nc}{Count of correct responses.}
 #'   \item{pc}{Percent of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 assoclang <- function(data, ...) {
   .Deprecated("countcorrect")

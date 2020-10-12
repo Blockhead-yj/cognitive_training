@@ -10,7 +10,6 @@
 #'   \item{mean_logerr}{Mean log absolute error.}
 #'   \item{mean_sqrterr}{Mean square root of absolute error.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 nle <- function(data, ...) {
   if (!all(utils::hasName(data, c("Number", "Resp")))) {

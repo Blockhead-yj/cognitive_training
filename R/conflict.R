@@ -17,7 +17,6 @@
 #'   \item{cong_eff_pc}{Congruency effect of percent of correct (PC), i.e., PC
 #'     congruency - PC incongruency.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 conflict <- function(data, ...) {
   .Defunct("congeff")

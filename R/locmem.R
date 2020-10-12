@@ -8,7 +8,6 @@
 #'   \item{mean_dist}{Mean distance.}
 #'   \item{pc}{Percentage of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 locmem <- function(data, ...) {
   if (!all(utils::hasName(data, "RespLocDist"))) {

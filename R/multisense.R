@@ -10,7 +10,6 @@
 #'   \item{mrt_mixed}{Mean reaction time of Mixed stimuli.}
 #'   \item{mrt_mixadv}{Mean reaction decrease of Mixed stimuli compared to other two types of stimuli.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 multisense <- function(data, ...) {
   if (!all(utils::hasName(data, c("Type", "RT")))) {

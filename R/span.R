@@ -10,8 +10,6 @@
 #'   \item{mean_span}{Mean span.}
 #'   \item{nc}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
-#' @importFrom rlang !!
 #' @export
 span <- function(data, ...) {
   delim <- "-"
@@ -51,8 +49,8 @@ span <- function(data, ...) {
       )
   }
   span_indices <- data %>%
-    dplyr::mutate(max_span = max(!!rlang::sym(len_var))) %>%
-    dplyr::group_by(!!rlang::sym(len_var), .data$max_span) %>%
+    dplyr::mutate(max_span = max(!!sym(len_var))) %>%
+    dplyr::group_by(!!sym(len_var), .data$max_span) %>%
     dplyr::summarise(pc = mean(.data$Outcome == 1)) %>%
     dplyr::group_by(.data$max_span) %>%
     dplyr::summarise(

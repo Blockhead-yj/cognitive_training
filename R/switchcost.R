@@ -19,7 +19,6 @@
 #'     times).}
 #'   \item{nc}{Count of correct responses.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 switchcost <- function(data, ...) {
   if (!all(utils::hasName(data, c("Block", "Task", "Type", "ACC", "RT")))) {

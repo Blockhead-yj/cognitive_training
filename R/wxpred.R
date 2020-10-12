@@ -10,7 +10,6 @@
 #'   \item{pc_b3}{Percent of correct responses for block 3.}
 #'   \item{pc_b4}{Percent of correct responses for block 4.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 wxpred <- function(data, ...) {
   if (!all(utils::hasName(data, c("Block", "ACC", "RT")))) {

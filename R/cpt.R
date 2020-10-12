@@ -15,7 +15,6 @@
 #'   \item{mrt}{Mean reaction time of hits.}
 #'   \item{rtsd}{Standard deviation of reaction times of hits.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 cpt <- function(data, ...) {
   if (!all(utils::hasName(data, c("Type", "RT", "ACC")))) {

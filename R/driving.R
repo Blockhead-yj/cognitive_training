@@ -7,7 +7,6 @@
 #' @return A `data.frame` contains following values:
 #'   \item{still_ratio}{The ratio of still duration in yellow light state.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 driving <- function(data, ...) {
   if (!all(utils::hasName(data, c("YellowDur", "StillDur", "StillLight")))) {

@@ -16,10 +16,11 @@ Imports:
     purrr,
     stringr,
     jsonlite,
-    rlang
+    rlang (>= 0.1.2)
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/psychelzh/dataprocr2
 BugReports: https://github.com/psychelzh/dataprocr2/issues
 Suggests:
-    testthat
+    testthat,
+    roxygen2

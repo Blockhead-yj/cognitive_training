@@ -19,7 +19,6 @@
 #'   \item{dprime_left}{Sensitivity index (d') of left side.}
 #'   \item{dprime_right}{Sensitivity index (d') of right side.}
 #'   \item{is_normal}{Checking result whether the data is normal.}
-#' @importFrom rlang .data
 #' @export
 dualtask <- function(data, ...) {
   . <- NULL
