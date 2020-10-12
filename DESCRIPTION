@@ -1,27 +1,31 @@
-Package: dataprocr2
 Type: Package
+Package: dataprocr2
 Title: Utility Functions for Data Processing of Iquizoo Games
 Version: 0.0.3.9003
-Authors@R: person("Liang", "Zhang", email = "psychelzh@outlook.com",
-                 role = c("aut", "cre"))
-Description: Several couples of games are developed by IQUIZOO.COM. Here
-    are the functions used to do data processing for all of those games.
+Authors@R: 
+    person(given = "Liang",
+           family = "Zhang",
+           role = c("aut", "cre"),
+           email = "psychelzh@outlook.com")
+Description: Several couples of games are developed by
+    IQUIZOO.COM. Here are the functions used to do data processing for all
+    of those games.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-Imports:
-    magrittr,
-    dplyr,
-    tidyr,
-    purrr,
-    stringr,
-    jsonlite,
-    rlang (>= 0.1.2),
-    tibble
-RoxygenNote: 7.1.1
-Roxygen: list(markdown = TRUE)
 URL: https://github.com/psychelzh/dataprocr2
 BugReports: https://github.com/psychelzh/dataprocr2/issues
+Imports:
+    dplyr,
+    jsonlite,
+    magrittr,
+    purrr,
+    rlang (>= 0.1.2),
+    stringr,
+    tibble,
+    tidyr
 Suggests:
-    testthat,
-    roxygen2
+    roxygen2,
+    testthat
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
