@@ -45,11 +45,12 @@ switchcost <- function(data, ...) {
     dplyr::summarise(
       has_no_response = all(.data$ACC == -1),
       type_block = ifelse(
-        is.na(.data$Type) |
-          .data$Type %in% c("preswitch", "postswitch", "Pure", ""),
+        all(
+          is.na(.data$Type) |
+          .data$Type %in% c("preswitch", "postswitch", "Pure", "")
+        ),
         "pure", "mixed"
-      ) %>%
-        unique(),
+      ),
       .groups = "drop"
     ) %>%
     dplyr::mutate(
