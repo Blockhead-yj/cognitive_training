@@ -98,3 +98,46 @@ calc_switch_cost <- function(data,
     )
   cbind(switch_cost_count, switch_cost_rt)
 }
+#' Get the matched variables for input data
+#'
+#' Input data require several variables to be existed, and some variables can
+#' have alternatives. Here we check if all the variables exist, and if only one
+#' of the alternatives exist. If the check is passed, the matched result will be
+#' returned, or a `FALSE` value will be returned.
+#'
+#' @param data Required. Raw data, a `data.frame`.
+#' @param vars_required Required. A `data.frame` containing the configuration of
+#'   required variables. At least contains `name` variable, which lists all of
+#'   the required variable names, each element of which is a character vector
+#'   containing all the possible names.
+match_data_vars <- function(data, vars_required) {
+  var_chk_result <- vars_required %>%
+    dplyr::mutate(
+      purrr::map_df(
+        .data$name,
+        ~ {
+          match_result <- utils::hasName(data, .x)
+          tibble(
+            is_found = any(match_result),
+            is_confused = sum(match_result) > 1,
+            matched =
+              # the match can be of length 0, so use `if` instead of `if_else`
+              if (.data$is_confused | (!.data$is_found)) {
+                NA
+              } else {
+                .x[match_result]
+              }
+          )
+        }
+      )
+    )
+  if (!all(var_chk_result$is_found)) {
+    warning("At least one of the required variables are missing.")
+    return(FALSE)
+  }
+  if (any(var_chk_result$is_confused)) {
+    warning("At least one of the variables have more than one match.")
+    return(FALSE)
+  }
+  return(var_chk_result)
+}
