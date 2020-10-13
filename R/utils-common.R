@@ -40,7 +40,7 @@ calc_cong_eff <- function(data,
 #' @param data Required. A `data.frame` from which the indices are calculated.
 #' @param config_block Required. A `data.frame` contains the configurations of
 #'   each block. At least contains these variables:
-#'   * `Block`: The block identifier.
+#'   * Same name as `name_block` argument: The block identifier.
 #'   * `has_no_response`: Logical value indicating whether this block has no
 #'     valid responses or not.
 #'   * `type_block`: The type of each block: "pure" or "mixed".

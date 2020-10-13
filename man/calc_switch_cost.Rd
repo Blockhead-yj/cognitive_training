@@ -21,7 +21,7 @@ calc_switch_cost(
 \item{config_block}{Required. A \code{data.frame} contains the configurations of
 each block. At least contains these variables:
 \itemize{
-\item \code{Block}: The block identifier.
+\item Same name as \code{name_block} argument: The block identifier.
 \item \code{has_no_response}: Logical value indicating whether this block has no
 valid responses or not.
 \item \code{type_block}: The type of each block: "pure" or "mixed".
